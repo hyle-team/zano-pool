@@ -13,7 +13,7 @@
         "base58-native": "*",
         "bignum": "*",
         "cli-color": "*",
-        "cryptoforknote-util": "git://github.com/muscleman/zano-node-util.git",
+        "cryptoforknote-util": "git://github.com/hyle-team/zano-node-util.git",
         "cryptonight-hashing": "git://github.com/MoneroOcean/node-cryptonight-hashing.git",
         "dateformat": "^4.5.1",
         "mailgun.js": "*",
