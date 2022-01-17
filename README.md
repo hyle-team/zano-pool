@@ -744,7 +744,7 @@ follow the directions
 #### Firewall
 If using UFW apply the appropriate rules to allow the website and miner ports to be used.
 ```bash
-sudo ufw add 3336,3337,3338,6117,6119/tcp
+sudo ufw add 3336,3337,3338,6117,6119/tcp comment "my zano pool rules"
 ```
 
 #### Upgrading
