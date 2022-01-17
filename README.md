@@ -157,7 +157,7 @@ npm update
 
 #### 2) Configuration
 
-Copy the `config_examples/COIN.json` file of your choice to `config.json` then overview each options and change any to match your preferred setup.
+Use the `config.json` mainnet or `config-test.json` then overview each options and change any to match your preferred setup.
 
 Explanation for each field:
 ```javascript
@@ -165,13 +165,13 @@ Explanation for each field:
 "poolHost": "your.pool.host",
 
 /* Used for storage in redis so multiple coins can share the same redis instance. */
-"coin": "graft", // Must match the parentCoin variable in config.js
+"coin": "Zano", // Must match the parentCoin variable in config.js
 
 /* Used for front-end display */
-"symbol": "GRFT",
+"symbol": "ZANO",
 
 /* Minimum units in a single coin, see COIN constant in DAEMON_CODE/src/cryptonote_config.h */
-"coinUnits": 10000000000,
+"coinUnits": 1000000000000,
 
 /* Number of coin decimals places for notifications and front-end */
 "coinDecimalPlaces": 4,
@@ -179,23 +179,18 @@ Explanation for each field:
 /* Coin network time to mine one block, see DIFFICULTY_TARGET constant in DAEMON_CODE/src/cryptonote_config.h */
 "coinDifficultyTarget": 120,
 
-"blockchainExplorer": "http://blockexplorer.arqma.com/block/{id}",  //used on blocks page to generate hyperlinks.
-"transactionExplorer": "http://blockexplorer.arqma.com/tx/{id}",    //used on the payments page to generate hyperlinks
+"blockchainExplorer": "https://explorer.zano.org/block/{id}",  //used on blocks page to generate hyperlinks.
+"transactionExplorer": "https://explorer.zano.org/transaction/{id}",    //used on the payments page to generate hyperlinks
 
 /* Set daemon type. Supported values: default, forknote (Fix block height + 1), bytecoin (ByteCoin Wallet RPC API) */
 "daemonType": "default",
-
-/* Set Cryptonight algorithm settings.
-   Supported algorithms: cryptonight (default). cryptonight_light and cryptonight_heavy
-   Supported variants for "cryptonight": 0 (Original), 1 (Monero v7), 3 (Stellite / XTL)
-   Supported variants for "cryptonight_light": 0 (Original), 1 (Aeon v7), 2 (IPBC)
-   Supported blob types: 0 (Cryptonote), 1 (Forknote v1), 2 (Forknote v2), 3 (Cryptonote v2 / Masari) */
-"cnAlgorithm": "cryptonight",
-"cnVariant": 1,
+"cnAlgorithm": "ethash",
+"cnVariant": 2,
 "cnBlobType": 0,
 "includeHeight":false, /*true to include block.height in job to miner*/
 "includeAlgo":"cn/wow", /*wownero specific change to include algo in job to miner*/	"includeAlgo":"cn/wow", /*wownero specific change to include algo in job to miner*/
-"isRandomX": true,
+"isRandomX": false,
+"reward": 1000000000000,
 /* Logging */
 "logging": {
 
@@ -209,7 +204,8 @@ Explanation for each field:
         "directory": "logs",
 
         /* How often (in seconds) to append/flush data to the log files. */
-        "flushInterval": 5
+        "flushInterval": 5,
+	"prefix": "Zano"
     },
 
     "console": {
@@ -219,20 +215,7 @@ Explanation for each field:
         "colors": true
     }
 },
-"childPools":[ {"poolAddress":"your wallet",
-                    "intAddressPrefix": null,
-                    "coin": "MCN",  	//must match COIN name in the child pools config.json
-                    "childDaemon": {
-                        "host": "127.0.0.1",
-                        "port": 26081
-                    },
-                    "pattern": "^Vdu",  //regex to identify which childcoin the miner specified in password. eg) Vdu is first 3 chars of a MCN wallet address.
-                    "blockchainExplorer": "https://explorer.mcn.green/?hash={id}#blockchain_block",
-                    "transactionExplorer": "https://explorer.mcn.green/?hash={id}#blockchain_transaction",
-                    "api": "https://multi-miner.smartcoinpool.net/apiMerged1",
-                    "enabled": true
-                    }
-]
+"childPools":[]
 /* Modular Pool Server */
 "poolServer": {
     "enabled": true,
@@ -246,11 +229,11 @@ Explanation for each field:
     /* Address where block rewards go, and miner payments come from. */
     "poolAddress": "your wallet",
 
-    /* This is the integrated address prefix used for miner login validation. */
-    "intAddressPrefix": 91,
+    /* This is the integrated address prefix used for miner login validation. not required for zano */
+    "intAddressPrefix": null,
     
-    /* This is the Subaddress prefix used for miner login validation. */
-    "subAddressPrefix": 252,
+    /* This is the Subaddress prefix used for miner login validation. not required for zano*/
+    "subAddressPrefix": null,
     
     /* Poll RPC daemons for new blocks every this many milliseconds. */
     "blockRefreshInterval": 1000,
@@ -264,33 +247,33 @@ Explanation for each field:
     
     "ports": [
         {
-            "port": 3333, // Port for mining apps to connect to
-            "difficulty": 2000, // Initial difficulty miners are set to
+            "port": 3336, // Port for mining apps to connect to
+            "difficulty": 50000000, // Initial difficulty miners are set to
             "desc": "Low end hardware" // Description of port
         },
         {
-            "port": 4444,
-            "difficulty": 15000,
+            "port": 3337,
+            "difficulty": 600000000,
             "desc": "Mid range hardware"
         },
         {
-            "port": 5555,
-            "difficulty": 25000,
+            "port": 3338,
+            "difficulty": 5000000000,
             "desc": "High end hardware"
         },
         {
-            "port": 7777,
+            "port": 3339,
             "difficulty": 500000,
             "desc": "Cloud-mining / NiceHash"
         },
         {
-            "port": 8888,
+            "port": 3340,
             "difficulty": 25000,
             "desc": "Hidden port",
             "hidden": true // Hide this port in the front-end
         },
         {
-            "port": 9999,
+            "port": 3341,
             "difficulty": 20000,
             "desc": "SSL connection",
             "ssl": true // Enable SSL
@@ -301,12 +284,12 @@ Explanation for each field:
        individual miners based on their hashrate in order to lower networking and CPU
        overhead. */
     "varDiff": {
-        "minDiff": 100, // Minimum difficulty
-        "maxDiff": 100000000,
-        "targetTime": 60, // Try to get 1 share per this many seconds
+        "minDiff": 50000000, // Minimum difficulty
+        "maxDiff": 5000000000,
+        "targetTime": 45, // Try to get 1 share per this many seconds
         "retargetTime": 30, // Check to see if we should retarget every this many seconds
-        "variancePercent": 30, // Allow time to vary this % from target without retargeting
-        "maxJump": 100 // Limit diff percent increase/decrease in a single retargeting
+        "variancePercent": 5, // Allow time to vary this % from target without retargeting
+        "maxJump": 20 // Limit diff percent increase/decrease in a single retargeting
     },
 	
     /* Set difficulty on miner client side by passing <address> param with +<difficulty> postfix */
@@ -317,10 +300,7 @@ Explanation for each field:
 
     /* Set payment ID on miner client side by passing <address>.<paymentID> */
     "paymentId": {
-        "addressSeparator": ".", // Character separator between <address> and <paymentID>
-        "validation": true // Refuse login if non alphanumeric characters in <paymentID>
-        "validations": ["1,16", "64"], //regex quantity. range 1-16 characters OR exactly 64 character
-        "ban": true  // ban the miner for invalid paymentid
+        "addressSeparator": "+", // Character separator between <address> and <paymentID>
     },
 
     /* Feature to trust share difficulties from miners which can
@@ -352,17 +332,17 @@ Explanation for each field:
 /* Module that sends payments to miners according to their submitted shares. */
 "payments": {
     "enabled": true,
-    "interval": 300, // How often to run in seconds
-    "maxAddresses": 50, // Split up payments if sending to more than this many addresses
-    "mixin": 5, // Number of transactions yours is indistinguishable from
+    "interval": 900, // How often to run in seconds
+    "maxAddresses": 5, // Split up payments if sending to more than this many addresses
+    "mixin": 1, // Number of transactions yours is indistinguishable from
     "priority": 0, // The transaction priority    
-    "transferFee": 4000000000, // Fee to pay for each transaction
+    "transferFee": 10000000000, // Fee to pay for each transaction
     "dynamicTransferFee": true, // Enable dynamic transfer fee (fee is multiplied by number of miners)
     "minerPayFee" : true, // Miner pays the transfer fee instead of pool owner when using dynamic transfer fee
-    "minPayment": 100000000000, // Miner balance required before sending payment
-    "maxPayment": null, // Maximum miner balance allowed in miner settings
-    "maxTransactionAmount": 0, // Split transactions by this amount (to prevent "too big transaction" error)
-    "denomination": 10000000000 // Truncate to this precision and store remainder
+    "minPayment": 1000000000000, // Miner balance required before sending payment
+    "maxPayment": 100000000000000, // Maximum miner balance allowed in miner settings
+    "maxTransactionAmount": 100000000000000, // Split transactions by this amount (to prevent "too big transaction" error)
+    "denomination": 1000000000000 // Truncate to this precision and store remainder
 },
 
 /* Module that monitors the submitted block maturities and manages rounds. Confirmed
@@ -370,13 +350,13 @@ Explanation for each field:
    to their shares. */
 "blockUnlocker": {
     "enabled": true,
-    "interval": 30, // How often to check block statuses in seconds
+    "interval": 60, // How often to check block statuses in seconds
 
     /* Block depth required for a block to unlocked/mature. Found in daemon source as
        the variable CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW */
-    "depth": 60,
-    "poolFee": 0.8, // 0.8% pool fee (1% total fee total including donations)
-    "devDonation": 0.2, // 0.2% donation to send to pool dev
+    "depth": 10,
+    "poolFee": 0.5, // 0.5% pool fee (1% total fee total including donations)
+    "devDonation": 0.5, // 0.5% donation to send to pool dev
     "networkFee": 0.0, // Network/Governance fee (used by some coins like Loki)
     
     /* Some forknote coins have an issue with block height in RPC request, to fix you can enable this option.
@@ -388,7 +368,7 @@ Explanation for each field:
 "api": {
     "enabled": true,
     "hashrateWindow": 600, // How many second worth of shares used to estimate hash rate
-    "updateInterval": 3, // Gather stats and broadcast every this many seconds
+    "updateInterval": 15, // Gather stats and broadcast every this many seconds
     "bindIp": "0.0.0.0", // Bind API to a specific IP (set to 0.0.0.0 for all)
     "port": 8117, // The API port
     "blocks": 30, // Amount of blocks to send at a time
@@ -401,18 +381,23 @@ Explanation for each field:
     "sslCA": "./chain.pem", // The SSL certificate authority chain
     "trustProxyIP": false // Proxy X-Forwarded-For support
 },
+/* Zmq notifications Not Used */
+"zmq": {
+"enabled": false,
+"host": "127.0.0.1",
+"port": 39995
+},
 
 /* Coin daemon connection details (default port is 18981) */
 "daemon": {
     "host": "127.0.0.1",
-    "port": 18981
+    "port": 11211
 },
 
 /* Wallet daemon connection details (default port is 18980) */
 "wallet": {
     "host": "127.0.0.1",
-    "port": 18982,
-    "password": "--rpc-password"
+    "port": 3996
 },
 
 /* Redis connection info (default port is 6379) */
@@ -524,7 +509,7 @@ Explanation for each field:
 
 /* Prices settings for market and price charts */
 "prices": {
-    "source": "cryptonator", // Exchange (supported values: cryptonator, altex, crex24, cryptopia, stocks.exchange, tradeogre, maplechange)
+    "source": "tradeogre", // Exchange (supported values: cryptonator, altex, crex24, cryptopia, stocks.exchange, tradeogre, maplechange)
     "currency": "USD" // Default currency
 },
 	    
@@ -666,12 +651,6 @@ var facebook = "https://www.facebook.com/<YourPoolFacebook";
 /* Market stat display params from https://www.cryptonator.com/widget */
 var marketCurrencies = ["{symbol}-BTC", "{symbol}-USD", "{symbol}-EUR", "{symbol}-CAD"];
 
-/* Used for front-end block links. */
-var blockchainExplorer = "http://chainradar.com/{symbol}/block/{id}";
-
-/* Used by front-end transaction links. */
-var transactionExplorer = "http://chainradar.com/{symbol}/transaction/{id}";
-
 /* Any custom CSS theme for pool frontend */
 var themeCss = "themes/light.css";
 
@@ -741,6 +720,23 @@ By adding this you will need to update your `api` variable in the `website_examp
 `var api = "//api.poolhost.com";`
 
 You no longer need to include the port in the variable because of the proxy connection.
+
+#### NGINX
+If using nginx to serve your website the following command can be used to verify your configuration is correct.
+```bash
+sudo service nginx testconfig
+```
+Once you verify your setup reload/restart nginx
+```bash
+sudo service nginx reload
+```
+
+#### CertBot
+If using cerbot and nginx to maintain ssl certs install certbot and run the following command
+```bash
+sudo certbot --nginx
+```
+follow the directions
 
 
 #### Upgrading
