@@ -16,6 +16,7 @@ High performance Node.js (with native C addons) mining pool for CryptoNote based
   * [SSL](#ssl)
   * [Certbot](#certbot)
   * [NGINX](#nginx)
+  * [Firewall](#firewall)
   * [Upgrading](#upgrading)
 * [JSON-RPC Commands from CLI](#json-rpc-commands-from-cli)
 * [Monitoring Your Pool](#monitoring-your-pool)
@@ -740,6 +741,11 @@ sudo certbot --nginx
 ```
 follow the directions
 
+#### Firewall
+If using UFW apply the appropriate rules to allow the website and miner ports to be used.
+```bash
+sudo ufw add 3336,3337,3338,6117,6119/tcp
+```
 
 #### Upgrading
 When updating to the latest code its important to not only `git pull` the latest from this repo, but to also update
