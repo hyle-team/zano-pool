@@ -14,6 +14,8 @@ High performance Node.js (with native C addons) mining pool for CryptoNote based
   * [Host the front-end](#4-host-the-front-end)
   * [Customizing your website](#5-customize-your-website)
   * [SSL](#ssl)
+  * [Certbot](#certbot)
+  * [NGINX](#nginx)
   * [Upgrading](#upgrading)
 * [JSON-RPC Commands from CLI](#json-rpc-commands-from-cli)
 * [Monitoring Your Pool](#monitoring-your-pool)
