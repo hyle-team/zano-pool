@@ -630,11 +630,11 @@ Variable explanations:
 /* Must point to the API setup in your config.json file. */
 var api = "http://poolhost:8117";
 
-/* Pool server host to instruct your miners to point to (override daemon setting if set) */
-var poolHost = "poolhost.com";
+/*must match the coin name in your config.json file*/
+let parentCoin = "Zano"
 
-/* Number of coin decimals places (override daemon setting if set) */
-"coinDecimalPlaces": 4,
+/*display units used for pool*/
+let byteUnits = [' H', ' KH', ' MH', ' GH', ' TH', ' PH', 'EH', 'ZH', 'YH']
 
 /* Contact email address. */
 var email = "support@poolhost.com";
@@ -649,7 +649,7 @@ var discord = "https://discordapp.com/invite/YourPool";
 var facebook = "https://www.facebook.com/<YourPoolFacebook";
 
 /* Market stat display params from https://www.cryptonator.com/widget */
-var marketCurrencies = ["{symbol}-BTC", "{symbol}-USD", "{symbol}-EUR", "{symbol}-CAD"];
+var marketCurrencies = ["{symbol}-BTC", "{symbol}-LTC", "{symbol}-DOGE", "{symbol}-USDT", "{symbol}-USD", "{symbol}-EUR", "{symbol}-CAD"];
 
 /* Any custom CSS theme for pool frontend */
 var themeCss = "themes/light.css";
