@@ -747,6 +747,11 @@ If using UFW apply the appropriate rules to allow the website and miner ports to
 sudo ufw add 3336,3337,3338,6117,6119/tcp comment "my zano pool rules"
 ```
 
+To view or edit these newly created rules
+```bash
+sudo ufw status numbered
+```
+
 #### Upgrading
 When updating to the latest code its important to not only `git pull` the latest from this repo, but to also update
 the Node.js modules, and any config files that may have been changed.
