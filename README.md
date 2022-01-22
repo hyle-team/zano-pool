@@ -99,7 +99,7 @@ Usage
 * Coin daemon(s) (find the coin's repo and build latest version from source)
   * [List of Cryptonote coins](https://github.com/muscleman/progpow-nodejs-pool/wiki/Cryptonote-Coins)
 * [Node.js](http://nodejs.org/) 12.22.6 to 14.15.2
-  * For Ubuntu: 
+  * For Ubuntu: 18.04 or 20.04
  ```
   curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash
   sudo apt-get install -y nodejs
