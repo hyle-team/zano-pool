@@ -108,7 +108,7 @@ Usage
 
 
 * [Redis](http://redis.io/) key-value store v2.6+ 
-  * For Ubuntu: 
+  * For Ubuntu: 18.04 or 20.04
 ```
 sudo add-apt-repository ppa:chris-lea/redis-server
 sudo apt-get update
