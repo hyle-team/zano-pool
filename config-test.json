@@ -117,6 +117,7 @@
         "interval": 60,
         "depth": 10,
         "poolFee": 0.2,
+        "soloFee": 0.2,
         "devDonation": 0.5,
         "networkFee": 0.0
     },
