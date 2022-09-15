@@ -152,7 +152,7 @@ sudo su - your-user
 Clone the repository and run `npm update` for all the dependencies to be installed:
 
 ```bash
-git clone https://github.com/muscleman/progpowz-nodejs-pool.git pool
+git clone https://github.com/hyle-team/zano-pool.git pool
 cd pool
 
 npm update
